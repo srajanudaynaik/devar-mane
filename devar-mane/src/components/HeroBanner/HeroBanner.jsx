@@ -67,10 +67,11 @@ export default function HeroBanner() {
         </p>
 
         <button
-          className="btn-primary px-8 py-4 rounded-lg text-lg font-semibold fade-in hover:shadow-lg transition-all duration-300"
+          className="btn-primary px-8 py-4 rounded-lg text-lg font-semibold  hover:shadow-lg transition duration-100 bg-orange-500"
           data-testid="hero-cta-button"
         >
           Book Your Stay
+          
         </button>
       </div>
     </section>

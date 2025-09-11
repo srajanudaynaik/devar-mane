@@ -25,8 +25,9 @@ export default function Header({ onPageChange, currentPage }) {
     <nav className="bg-card shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <button 
-            onClick={() => handleNavigation('home')} 
+          {/* Logo */}
+          <button
+            onClick={() => handleNavigation("home")}
             className="flex items-center group"
           >
             <Home className="text-primary text-2xl mr-3 group-hover:scale-110 transition-transform" />
@@ -35,8 +36,8 @@ export default function Header({ onPageChange, currentPage }) {
             </h1>
           </button>
 
-          {/* Desktop nav */}
-          <div className="hidden md:block">
+          {/* Navigation (tablet + desktop) */}
+          <div className="hidden sm:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navigation.map((item) => (
                 <button
@@ -57,8 +58,8 @@ export default function Header({ onPageChange, currentPage }) {
             </div>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu button (only <640px) */}
+          <div className="sm:hidden">
             <button
               onClick={toggleMobileMenu}
               className="text-foreground hover:text-primary transition-colors"
@@ -76,7 +77,7 @@ export default function Header({ onPageChange, currentPage }) {
 
       {/* Mobile dropdown menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-card border-t border-border">
+        <div className="sm:hidden bg-card border-t border-border">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navigation.map((item) => (
               <button
