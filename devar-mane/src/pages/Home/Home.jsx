@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import { useEffect, useRef } from "react";
 import HeroBanner from "../../components/HeroBanner/HeroBanner";
 import { Wifi, Utensils, Car, Star, MapPin } from "lucide-react";
@@ -29,12 +28,12 @@ export default function Home({ onPageChange }) {
   ];
 
   const nearbyPlaces = [
-    { name: "Ancient Temple", description: "Sacred heritage site with stunning architecture", distance: "2 km away", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
+    { name: "Ancient Temple", description: "Sacred heritage site with stunning architecture", distance: "2 km away", image: "https://images.unsplash.com/photo-1544735716/392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
     { name: "Spice Plantation", description: "Guided tours through aromatic spice gardens", distance: "5 km away", image: "https://images.unsplash.com/photo-1608178398319-48f814d0750c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
     { name: "Mystic Falls", description: "Breathtaking waterfall perfect for nature walks", distance: "8 km away", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
     { name: "Local Market", description: "Vibrant marketplace with local crafts and foods", distance: "3 km away", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
     { name: "Valley Viewpoint", description: "Panoramic views of rolling hills and valleys", distance: "12 km away", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
-    { name: "Heritage Center", description: "Explore traditional arts and cultural exhibits", distance: "6 km away", image: "https://images.unsplash.com/photo/1544735716/392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
+    { name: "Heritage Center", description: "Explore traditional arts and cultural exhibits", distance: "6 km away", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
   ];
 
   const testimonials = [
@@ -94,7 +93,7 @@ export default function Home({ onPageChange }) {
         </div>
       </section>
 
-      {/* ----------  Rooms Section  (only part changed)  ---------- */}
+      {/* ----------  Rooms Section  ---------- */}
       <section className="py-20 bg-muted" data-testid="home-rooms-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 fade-in">
@@ -130,7 +129,6 @@ export default function Home({ onPageChange }) {
                     <span className="text-primary font-bold" data-testid={`room-price-${index}`}>
                       {room.price}
                     </span>
-                    {/* 👇 single change: navigate to Rooms page */}
                     <button
                       onClick={() => onPageChange("rooms")}
                       className="btn-primary px-4 py-2 rounded-lg text-sm"
@@ -189,7 +187,7 @@ export default function Home({ onPageChange }) {
         </div>
       </section>
 
-      {/* ----------  Testimonials Section  ---------- */}
+      {/* ----------  Testimonials Section  (IMAGE LOOK)  ---------- */}
       <section className="py-20 bg-muted" data-testid="home-testimonials-section">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 fade-in">
@@ -202,30 +200,35 @@ export default function Home({ onPageChange }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {testimonials.map((t, i) => (
               <div
-                key={index}
-                className="bg-card p-8 rounded-xl shadow-lg fade-in"
-                data-testid={`testimonial-${index}`}
+                key={i}
+                className="bg-card p-8 rounded-xl shadow-lg fade-in flex flex-col items-center text-center"
+                data-testid={`testimonial-${i}`}
               >
-                <div className="flex mb-4" data-testid={`testimonial-rating-${index}`}>
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                {/* bigger stars row */}
+                <div className="flex mb-4" data-testid={`testimonial-rating-${i}`}>
+                  {[...Array(t.rating)].map((_, k) => (
+                    <Star key={k} className="w-6 h-6 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-muted-foreground mb-6 italic" data-testid={`testimonial-comment-${index}`}>
-                  "{testimonial.comment}"
+
+                {/* centred quote */}
+                <p className="text-muted-foreground mb-6 italic text-lg leading-relaxed" data-testid={`testimonial-comment-${i}`}>
+                  "{t.comment}"
                 </p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold mr-4">
-                    {testimonial.initial}
+
+                {/* avatar + name / location row */}
+                <div className="flex items-center justify-center gap-4 mt-auto">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold text-lg">
+                    {t.initial}
                   </div>
-                  <div>
-                    <h4 className="font-semibold" data-testid={`testimonial-name-${index}`}>
-                      {testimonial.name}
+                  <div className="text-left">
+                    <h4 className="font-semibold" data-testid={`testimonial-name-${i}`}>
+                      {t.name}
                     </h4>
-                    <p className="text-sm text-muted-foreground" data-testid={`testimonial-location-${index}`}>
-                      {testimonial.location}
+                    <p className="text-sm text-muted-foreground" data-testid={`testimonial-location-${i}`}>
+                      {t.location}
                     </p>
                   </div>
                 </div>
