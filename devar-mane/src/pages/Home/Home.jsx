@@ -3,136 +3,51 @@ import { useEffect, useRef } from "react";
 import HeroBanner from "../../components/HeroBanner/HeroBanner";
 import { Wifi, Utensils, Car, Star, MapPin } from "lucide-react";
 
-export default function Home() {
+export default function Home({ onPageChange }) {
   const observerRef = useRef(null);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
+          if (entry.isIntersecting) entry.target.classList.add("visible");
         });
       },
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
-
     document.querySelectorAll(".fade-in").forEach((el) => {
       observerRef.current?.observe(el);
     });
-
     return () => observerRef.current?.disconnect();
   }, []);
 
   const rooms = [
-    {
-      name: "Heritage Room",
-      description: "Traditional charm with modern amenities",
-      price: "₹2,500/night",
-      image:
-        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-    },
-    {
-      name: "Garden View",
-      description: "Peaceful retreat overlooking lush gardens",
-      price: "₹3,000/night",
-      image:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-    },
-    {
-      name: "Deluxe Suite",
-      description: "Spacious suite with premium facilities",
-      price: "₹4,000/night",
-      image:
-        "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-    },
-    {
-      name: "Family Room",
-      description: "Perfect for families and group stays",
-      price: "₹5,500/night",
-      image:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-    },
+    { name: "Heritage Room", description: "Traditional charm with modern amenities", price: "₹2,500/night", image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" },
+    { name: "Garden View", description: "Peaceful retreat overlooking lush gardens", price: "₹3,000/night", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" },
+    { name: "Deluxe Suite", description: "Spacious suite with premium facilities", price: "₹4,000/night", image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" },
+    { name: "Family Room", description: "Perfect for families and group stays", price: "₹5,500/night", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" },
   ];
 
   const nearbyPlaces = [
-    {
-      name: "Ancient Temple",
-      description: "Sacred heritage site with stunning architecture",
-      distance: "2 km away",
-      image:
-        "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-    },
-    {
-      name: "Spice Plantation",
-      description: "Guided tours through aromatic spice gardens",
-      distance: "5 km away",
-      image:
-        "https://images.unsplash.com/photo-1608178398319-48f814d0750c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-    },
-    {
-      name: "Mystic Falls",
-      description: "Breathtaking waterfall perfect for nature walks",
-      distance: "8 km away",
-      image:
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-    },
-    {
-      name: "Local Market",
-      description: "Vibrant marketplace with local crafts and foods",
-      distance: "3 km away",
-      image:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-    },
-    {
-      name: "Valley Viewpoint",
-      description: "Panoramic views of rolling hills and valleys",
-      distance: "12 km away",
-      image:
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-    },
-    {
-      name: "Heritage Center",
-      description: "Explore traditional arts and cultural exhibits",
-      distance: "6 km away",
-      image:
-        "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-    },
+    { name: "Ancient Temple", description: "Sacred heritage site with stunning architecture", distance: "2 km away", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
+    { name: "Spice Plantation", description: "Guided tours through aromatic spice gardens", distance: "5 km away", image: "https://images.unsplash.com/photo-1608178398319-48f814d0750c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
+    { name: "Mystic Falls", description: "Breathtaking waterfall perfect for nature walks", distance: "8 km away", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
+    { name: "Local Market", description: "Vibrant marketplace with local crafts and foods", distance: "3 km away", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
+    { name: "Valley Viewpoint", description: "Panoramic views of rolling hills and valleys", distance: "12 km away", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
+    { name: "Heritage Center", description: "Explore traditional arts and cultural exhibits", distance: "6 km away", image: "https://images.unsplash.com/photo/1544735716/392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" },
   ];
 
   const testimonials = [
-    {
-      name: "Sarah Johnson",
-      location: "Traveler from UK",
-      rating: 5,
-      comment:
-        "Devar Mane truly felt like a home away from home. The warmth of the hosts and the authentic experiences made our stay unforgettable.",
-      initial: "S",
-    },
-    {
-      name: "Rajesh Patel",
-      location: "Family from Mumbai",
-      rating: 5,
-      comment:
-        "The hospitality was exceptional, and the traditional meals were absolutely delicious. We'll definitely be back!",
-      initial: "R",
-    },
-    {
-      name: "Maria Garcia",
-      location: "Solo Traveler",
-      rating: 5,
-      comment:
-        "A perfect blend of tradition and comfort. The rooms were clean, the location peaceful, and the hosts incredibly friendly.",
-      initial: "M",
-    },
+    { name: "Sarah Johnson", location: "Traveler from UK", rating: 5, comment: "Devar Mane truly felt like a home away from home. The warmth of the hosts and the authentic experiences made our stay unforgettable.", initial: "S" },
+    { name: "Rajesh Patel", location: "Family from Mumbai", rating: 5, comment: "The hospitality was exceptional, and the traditional meals were absolutely delicious. We'll definitely be back!", initial: "R" },
+    { name: "Maria Garcia", location: "Solo Traveler", rating: 5, comment: "A perfect blend of tradition and comfort. The rooms were clean, the location peaceful, and the hosts incredibly friendly.", initial: "M" },
   ];
 
   return (
     <div>
-      <HeroBanner />
+      <HeroBanner onPageChange={onPageChange} />
 
-      {/* About Section */}
+      {/* ----------  About Section  ---------- */}
       <section className="py-20 bg-background" data-testid="home-about-section">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -179,7 +94,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Rooms Section */}
+      {/* ----------  Rooms Section  (only part changed)  ---------- */}
       <section className="py-20 bg-muted" data-testid="home-rooms-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 fade-in">
@@ -215,7 +130,12 @@ export default function Home() {
                     <span className="text-primary font-bold" data-testid={`room-price-${index}`}>
                       {room.price}
                     </span>
-                    <button className="btn-primary px-4 py-2 rounded-lg text-sm" data-testid={`room-details-button-${index}`}>
+                    {/* 👇 single change: navigate to Rooms page */}
+                    <button
+                      onClick={() => onPageChange("rooms")}
+                      className="btn-primary px-4 py-2 rounded-lg text-sm"
+                      data-testid={`room-details-button-${index}`}
+                    >
                       View Details
                     </button>
                   </div>
@@ -226,7 +146,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Nearby Places Section */}
+      {/* ----------  Nearby Places Section  ---------- */}
       <section className="py-20 bg-background" data-testid="home-nearby-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 fade-in">
@@ -269,7 +189,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* ----------  Testimonials Section  ---------- */}
       <section className="py-20 bg-muted" data-testid="home-testimonials-section">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 fade-in">

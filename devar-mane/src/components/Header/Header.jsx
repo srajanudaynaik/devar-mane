@@ -1,6 +1,6 @@
-// src/components/Header.jsx
 import { useState } from "react";
 import { Menu, X, Home } from "lucide-react";
+import "./Header.css"; 
 
 export default function Header({ onPageChange, currentPage }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
